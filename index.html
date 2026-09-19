@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TextScape</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="game-shell">
+      <!-- Main Four-Region Layout -->
+      <main class="game-layout">
+        <!-- Left Panel: World Navigation -->
+        <aside class="panel left-panel">
+          <section class="nav-group">
+            <h3 class="nav-group-title">World</h3>
+            <ul class="nav-list" id="world-nav">
+              <li data-action="explore">Explore</li>
+            </ul>
+          </section>
+
+          <section class="nav-group">
+            <h3 class="nav-group-title">Adventure</h3>
+            <ul class="nav-list" id="adventure-nav">
+              <li data-nav="quests">Quests</li>
+              <li data-nav="dungeons">Dungeons</li>
+            </ul>
+          </section>
+
+          <section class="nav-group">
+            <h3 class="nav-group-title">Social</h3>
+            <ul class="nav-list" id="social-nav">
+              <li class="disabled">Party</li>
+              <li class="disabled">Guild</li>
+            </ul>
+          </section>
+
+          <!-- Quest/Dungeon Details -->
+          <section id="quest-panel" style="display: none;">
+            <div class="section-heading">
+              <h3>Active Quests</h3>
+            </div>
+            <div id="quest-list"></div>
+          </section>
+
+          <section id="dungeon-panel" style="display: none;">
+            <div class="section-heading">
+              <h3>Known Dungeons</h3>
+            </div>
+            <div id="dungeon-list"></div>
+          </section>
+        </aside>
+
+        <!-- Center Panel: Gameplay Scene -->
+        <section class="panel center-panel" id="scene-container">
+          <!-- Dynamically rendered by SceneRenderer -->
+        </section>
+
+        <!-- Right Panel: Character Management -->
+        <aside class="panel right-panel">
+          <div class="character-tabs">
+            <button class="tab-button active" data-tab="character">Character</button>
+            <button class="tab-button" data-tab="inventory">Inventory</button>
+            <button class="tab-button disabled" data-tab="skills">Skills</button>
+          </div>
+
+          <!-- Character Tab -->
+          <div id="tab-character" class="tab-content active">
+            <section class="character-info-section">
+              <div class="character-portrait">
+                <div class="portrait-placeholder"></div>
+                <div class="character-details">
+                  <h2 id="character-name">Aster</h2>
+                  <p id="character-class">Level 18 Ranger</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="character-stats-section">
+              <h3 class="section-title">Vital Signs</h3>
+              <div id="vital-bars"></div>
+            </section>
+
+            <section class="character-stats-section">
+              <div class="section-heading">
+                <h3 class="section-title">Attributes</h3>
+                <span class="gold-display" id="gold-display">220g</span>
+              </div>
+              <ul class="stat-list" id="stat-list"></ul>
+            </section>
+
+            <section class="equipment-section">
+              <h3 class="section-title">Equipment</h3>
+              <div class="equipment-grid" id="equipment-grid"></div>
+            </section>
+          </div>
+
+          <!-- Inventory Tab -->
+          <div id="tab-inventory" class="tab-content">
+            <section class="inventory-section">
+              <div class="section-heading">
+                <h3 class="section-title">Inventory</h3>
+                <span class="inventory-hint">Click for options</span>
+              </div>
+              <div class="inventory-grid" id="inventory-grid"></div>
+              <p class="inventory-empty" id="inventory-empty" style="display: none;">Your inventory is empty.</p>
+            </section>
+          </div>
+
+          <!-- Skills Tab -->
+          <div id="tab-skills" class="tab-content">
+            <p class="placeholder-text">Skills system coming soon.</p>
+          </div>
+        </aside>
+      </main>
+
+      <!-- Bottom Panel: Chat/Communication -->
+      <footer class="chat-panel panel">
+        <div class="chat-tabs">
+          <button class="chat-tab active" data-channel="local">Local</button>
+          <button class="chat-tab disabled" data-channel="world">World</button>
+          <button class="chat-tab disabled" data-channel="party">Party</button>
+          <button class="chat-tab" data-channel="system">System</button>
+        </div>
+        <div class="chat-log" id="chat-log"></div>
+        <form class="chat-input" id="chat-form">
+          <input type="text" id="chat-input" placeholder="Type a command or message..." autocomplete="off" />
+          <button type="submit">Send</button>
+        </form>
+      </footer>
+    </div>
+
+    <!-- Context Menu for Inventory -->
+    <div class="inventory-menu" id="inventory-menu" role="menu" aria-hidden="true" style="display: none;">
+      <div class="inventory-menu-title" id="inventory-menu-title">Item</div>
+      <button type="button" data-inventory-action="use">Use</button>
+      <button type="button" data-inventory-action="sell">Sell</button>
+      <button type="button" data-inventory-action="delete">Delete</button>
+      <button type="button" data-inventory-action="cancel">Cancel</button>
+    </div>
+
+    <!-- Load order: DB → Data → Systems → UI → Core → App -->
+    <script src="db.js"></script>
+    <script src="src/data/assets.js"></script>
+    <script src="src/data/items.js"></script>
+    <script src="src/data/enemies.js"></script>
+    <script src="src/data/world.js"></script>
+    <script src="src/systems/travel.js"></script>
+    <script src="src/systems/inventory.js"></script>
+    <script src="src/systems/combat.js"></script>
+    <script src="src/ui/components.js"></script>
+    <script src="src/ui/renderer.js"></script>
+    <script src="src/core/state.js"></script>
+    <script src="src/core/commands.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+# Development tools
+dev-asset-browser.html
+dev-ui-browser.html
+
+# AI-generated documentation and status reports
+PHASE_1.5_REPORT.md
+PHASE_1.5_STATUS.md
+PHASE_1.5_SUMMARY.txt
+VALIDATION_REPORT.md
+docs/UI_ASSET_AUDIT.md
+docs/UI_TRANSFORMATION_GUIDE.md
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
