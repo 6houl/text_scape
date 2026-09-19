@@ -1,6 +1,7 @@
 # Development tools
 dev-asset-browser.html
 dev-ui-browser.html
+test-server.ps1
 
 # AI-generated documentation and status reports
 PHASE_1.5_REPORT.md
