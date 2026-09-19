@@ -171,52 +171,52 @@ img {
   text-align: center;
   
   /* Button background image */
-  background-image: url('assets/ui/Button/Button#1/Status=Grey_Default.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Grey_Default.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
 }
 
 .ui-button:hover:not(:disabled) {
-  background-image: url('assets/ui/Button/Button#1/Status=Grey_Hover.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Grey_Hover.png');
 }
 
 .ui-button:active:not(:disabled) {
-  background-image: url('assets/ui/Button/Button#1/Status=Pressed.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Pressed.png');
 }
 
 .ui-button:disabled {
-  background-image: url('assets/ui/Button/Button#1/Status=Disable.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Disable.png');
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .ui-button--red {
-  background-image: url('assets/ui/Button/Button#1/Status=Red_Default.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Red_Default.png');
 }
 
 .ui-button--red:hover:not(:disabled) {
-  background-image: url('assets/ui/Button/Button#1/Status=Red_Hover.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Red_Hover.png');
 }
 
 .ui-button--red:active:not(:disabled) {
-  background-image: url('assets/ui/Button/Button#1/Status=Pressed.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Pressed.png');
 }
 
 .ui-button--secondary {
-  background-image: url('assets/ui/Button/Button#2/Button#2_Status=Grey_Default.png');
+  background-image: url('assets/ui/Button/Button%232/Button%232_Status=Grey_Default.png');
 }
 
 .ui-button--secondary:hover:not(:disabled) {
-  background-image: url('assets/ui/Button/Button#2/Button#2_Status=Grey_Hover.png');
+  background-image: url('assets/ui/Button/Button%232/Button%232_Status=Grey_Hover.png');
 }
 
 .ui-button--secondary:active:not(:disabled) {
-  background-image: url('assets/ui/Button/Button#2/Button#2_Status=Pressed.png');
+  background-image: url('assets/ui/Button/Button%232/Button%232_Status=Pressed.png');
 }
 
 .ui-button--secondary:disabled {
-  background-image: url('assets/ui/Button/Button#2/Button#2_Status=Disable.png');
+  background-image: url('assets/ui/Button/Button%232/Button%232_Status=Disable.png');
 }
 
 /* =================================================================
@@ -249,7 +249,7 @@ img {
 .nav-list li {
   /* Use button styling */
   padding: 10px 12px;
-  background-image: url('assets/ui/Button/Button#1/Status=Grey_Default.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Grey_Default.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
@@ -261,16 +261,16 @@ img {
 }
 
 .nav-list li:hover {
-  background-image: url('assets/ui/Button/Button#1/Status=Grey_Hover.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Grey_Hover.png');
 }
 
 .nav-list li.active {
-  background-image: url('assets/ui/Button/Button#1/Status=Pressed.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Pressed.png');
   color: var(--gold);
 }
 
 .nav-list li.disabled {
-  background-image: url('assets/ui/Button/Button#1/Status=Disable.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Disable.png');
   cursor: not-allowed;
   opacity: 0.5;
   pointer-events: none;
@@ -432,7 +432,7 @@ img {
   border: none;
   
   /* Use button asset */
-  background-image: url('assets/ui/Button/Button#1/Status=Grey_Default.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Grey_Default.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
@@ -445,7 +445,7 @@ img {
 }
 
 .exit-button:hover {
-  background-image: url('assets/ui/Button/Button#1/Status=Grey_Hover.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Grey_Hover.png');
 }
 
 .exit-button .dir {
@@ -468,7 +468,7 @@ img {
 .action-button {
   /* Extends ui-button */
   padding: 12px 20px;
-  background-image: url('assets/ui/Button/Button#1/Status=Red_Default.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Red_Default.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
@@ -481,11 +481,11 @@ img {
 }
 
 .action-button:hover {
-  background-image: url('assets/ui/Button/Button#1/Status=Red_Hover.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Red_Hover.png');
 }
 
 .action-button:active {
-  background-image: url('assets/ui/Button/Button#1/Status=Pressed.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Pressed.png');
 }
 
 /* Combat Scene */
@@ -532,7 +532,7 @@ img {
   border: none;
   
   /* Use secondary button style */
-  background-image: url('assets/ui/Button/Button#2/Button#2_Status=Grey_Default.png');
+  background-image: url('assets/ui/Button/Button%232/Button%232_Status=Grey_Default.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
@@ -547,17 +547,17 @@ img {
 }
 
 .tab-button:hover:not(.disabled) {
-  background-image: url('assets/ui/Button/Button#2/Button#2_Status=Grey_Hover.png');
+  background-image: url('assets/ui/Button/Button%232/Button%232_Status=Grey_Hover.png');
   color: var(--text-primary);
 }
 
 .tab-button.active {
-  background-image: url('assets/ui/Button/Button#2/Button#2_Status=Pressed.png');
+  background-image: url('assets/ui/Button/Button%232/Button%232_Status=Pressed.png');
   color: var(--gold);
 }
 
 .tab-button.disabled {
-  background-image: url('assets/ui/Button/Button#2/Button#2_Status=Disable.png');
+  background-image: url('assets/ui/Button/Button%232/Button%232_Status=Disable.png');
   opacity: 0.4;
   cursor: not-allowed;
 }
@@ -902,7 +902,7 @@ img {
 }
 
 .inventory-menu button {
-  background-image: url('assets/ui/Button/Button#2/Button#2_Status=Grey_Default.png');
+  background-image: url('assets/ui/Button/Button%232/Button%232_Status=Grey_Default.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
@@ -916,7 +916,7 @@ img {
 }
 
 .inventory-menu button:hover {
-  background-image: url('assets/ui/Button/Button#2/Button#2_Status=Grey_Hover.png');
+  background-image: url('assets/ui/Button/Button%232/Button%232_Status=Grey_Hover.png');
 }
 
 .placeholder-text {
@@ -950,7 +950,7 @@ img {
   padding: 6px 12px;
   border: none;
   
-  background-image: url('assets/ui/Button/Button#3/Button#3_Status=Grey_Default.png');
+  background-image: url('assets/ui/Button/Button%233/Button%233_Status=Grey_Default.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
@@ -965,17 +965,17 @@ img {
 }
 
 .chat-tab:hover:not(.disabled) {
-  background-image: url('assets/ui/Button/Button#3/Button#3_Status=Grey_Hover.png');
+  background-image: url('assets/ui/Button/Button%233/Button%233_Status=Grey_Hover.png');
   color: var(--text-primary);
 }
 
 .chat-tab.active {
-  background-image: url('assets/ui/Button/Button#3/Button#3_Status=Pressed.png');
+  background-image: url('assets/ui/Button/Button%233/Button%233_Status=Pressed.png');
   color: var(--gold);
 }
 
 .chat-tab.disabled {
-  background-image: url('assets/ui/Button/Button#3/Button#3_Status=Disable.png');
+  background-image: url('assets/ui/Button/Button%233/Button%233_Status=Disable.png');
   opacity: 0.4;
   cursor: not-allowed;
 }
@@ -1054,7 +1054,7 @@ img {
   padding: 10px 20px;
   border: none;
   
-  background-image: url('assets/ui/Button/Button#1/Status=Red_Default.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Red_Default.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
@@ -1067,11 +1067,11 @@ img {
 }
 
 .chat-input button:hover {
-  background-image: url('assets/ui/Button/Button#1/Status=Red_Hover.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Red_Hover.png');
 }
 
 .chat-input button:active {
-  background-image: url('assets/ui/Button/Button#1/Status=Pressed.png');
+  background-image: url('assets/ui/Button/Button%231/Status=Pressed.png');
 }
 
 /* =================================================================
