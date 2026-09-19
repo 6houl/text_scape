@@ -139,8 +139,9 @@ img {
 
 .center-panel {
   padding: 20px 24px;
-  background-blend-mode: overlay;
-  background-color: rgba(10, 10, 10, 0.7);
+  /* PRIORITY 2: Calmer interior for reading - less texture */
+  background-image: none;
+  background-color: rgba(8, 8, 10, 0.95);
 }
 
 .right-panel {
@@ -336,8 +337,13 @@ img {
    ================================================================= */
 
 .exploration-scene, .combat-scene {
-  max-width: 800px;
+  max-width: 920px;
   margin: 0 auto;
+}
+
+/* PRIORITY 15: Constrain narrative text width for readability */
+.location-description {
+  max-width: 850px;
 }
 
 .scene-header {
@@ -392,26 +398,35 @@ img {
   gap: 8px;
 }
 
+/* PRIORITY 20: Cleaner interactable items - subtle treatment */
 .interactable-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  background: rgba(20, 20, 20, 0.6);
-  border: 1px solid rgba(100, 70, 50, 0.3);
-  border-radius: 4px;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(15, 15, 18, 0.7);
+  border: 1px solid rgba(100, 70, 50, 0.25);
+  border-radius: 3px;
+  border-left: 3px solid rgba(100, 70, 50, 0.5);
   color: var(--text-primary);
   cursor: pointer;
-  transition: border-color 0.15s;
+  transition: all 0.15s;
 }
 
 .interactable-item:hover {
-  border-color: rgba(140, 100, 70, 0.6);
-  background: rgba(30, 30, 30, 0.8);
+  border-left-color: var(--bronze);
+  background: rgba(20, 20, 24, 0.85);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .interactable-item .icon {
   font-size: 1.2rem;
+}
+
+.interactable-item img.icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .exits-section {
@@ -424,12 +439,14 @@ img {
   gap: 8px;
 }
 
+/* PRIORITY 3: Redesigned exit presentation - compact and readable */
 .exit-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 14px;
+  padding: 10px 16px;
   border: none;
+  min-height: 38px;
   
   /* Use button asset */
   background-image: url('assets/ui/Button/Button%231/Status=Grey_Default.png');
@@ -450,12 +467,16 @@ img {
 
 .exit-button .dir {
   color: var(--blue);
-  font-weight: 600;
+  font-weight: 700;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
 }
 
 .exit-button .dest {
   color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
 .scene-actions {
@@ -588,14 +609,18 @@ img {
   border-radius: 4px;
 }
 
+/* PRIORITY 6: Improved character portrait styling */
 .portrait-placeholder {
   width: 64px;
   height: 64px;
-  background: radial-gradient(circle, rgba(60, 40, 30, 0.4), rgba(20, 20, 20, 0.8));
-  border: 2px solid rgba(100, 70, 50, 0.6);
-  border-radius: 4px;
+  background: radial-gradient(circle, rgba(60, 40, 30, 0.4), rgba(15, 15, 18, 0.9));
+  border: 2px solid rgba(100, 70, 50, 0.7);
+  border-radius: 3px;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .portrait-placeholder::after {
@@ -604,7 +629,15 @@ img {
   inset: 0;
   background-image: url('assets/ui/Frame/Frame_background.png');
   background-size: 64px 64px;
-  opacity: 0.3;
+  opacity: 0.2;
+}
+
+.portrait-placeholder img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
 }
 
 .character-details h2 {
@@ -786,27 +819,26 @@ img {
   text-transform: uppercase;
 }
 
+/* PRIORITY 4 & 20: Cleaner inventory slots - icon-first design */
 .inventory-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 10px;
 }
 
 .inventory-slot {
   aspect-ratio: 1;
-  background: rgba(20, 20, 20, 0.8);
+  background: rgba(15, 15, 18, 0.9);
   border: 1px solid rgba(100, 70, 50, 0.4);
-  border-radius: 4px;
+  border-radius: 3px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 8px 4px;
   cursor: pointer;
-  transition: border-color 0.15s, transform 0.15s;
+  transition: border-color 0.15s, transform 0.1s;
   position: relative;
   overflow: hidden;
+  padding: 4px;
 }
 
 .inventory-slot::before {
@@ -814,55 +846,65 @@ img {
   position: absolute;
   inset: 0;
   background-image: url('assets/ui/Frame/Frame_background.png');
-  background-size: 64px 64px;
-  opacity: 0.1;
+  background-size: 80px 80px;
+  opacity: 0.08;
   pointer-events: none;
 }
 
 .inventory-slot:hover {
   border-color: var(--bronze);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(140, 100, 70, 0.3);
 }
 
 .inventory-slot[data-rarity="common"] {
-  border-color: rgba(100, 100, 100, 0.4);
+  border-color: rgba(120, 120, 120, 0.5);
 }
 
 .inventory-slot[data-rarity="uncommon"] {
-  border-color: rgba(109, 211, 155, 0.4);
+  border-color: rgba(109, 211, 155, 0.5);
 }
 
 .inventory-slot[data-rarity="rare"] {
-  border-color: rgba(104, 183, 255, 0.4);
+  border-color: rgba(104, 183, 255, 0.5);
 }
 
 .inventory-slot[data-rarity="epic"] {
-  border-color: rgba(183, 140, 255, 0.4);
+  border-color: rgba(183, 140, 255, 0.5);
 }
 
 .inventory-slot.empty {
-  opacity: 0.3;
+  opacity: 0.25;
+  cursor: default;
 }
 
 .item-icon {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   position: relative;
   z-index: 1;
 }
 
+/* Show item name ONLY in tooltip, not in slot */
 .item-name {
+  display: none;
+}
+
+/* Optional: quantity badge in bottom-right */
+.item-quantity {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background: rgba(0, 0, 0, 0.85);
+  color: var(--text-primary);
   font-size: 0.65rem;
-  text-align: center;
-  color: var(--text-muted);
-  line-height: 1.2;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: relative;
-  z-index: 1;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 2px;
+  z-index: 2;
+  border: 1px solid rgba(100, 70, 50, 0.6);
+  line-height: 1;
 }
 
 .inventory-empty {
@@ -872,33 +914,36 @@ img {
   font-size: 0.85rem;
 }
 
-/* Inventory Context Menu */
+/* PRIORITY 5: Improved inventory context menu */
 .inventory-menu {
   position: fixed;
   display: none;
   flex-direction: column;
-  gap: 6px;
-  min-width: 160px;
-  padding: 12px;
-  z-index: 1000;
+  gap: 4px;
+  min-width: 180px;
+  padding: 14px 12px;
+  z-index: 1001;
   
-  /* Use notice frame */
+  /* Darker interior with frame asset */
+  background-color: rgba(8, 8, 10, 0.98);
   background-image: url('assets/ui/Notice/Frame_notice_v1.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  background-blend-mode: overlay;
   image-rendering: pixelated;
   
   border: none;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
 }
 
 .inventory-menu-title {
-  padding: 4px 6px 8px;
+  padding: 4px 6px 10px;
   color: var(--gold);
   font-weight: 700;
-  font-size: 0.8rem;
-  border-bottom: 1px solid rgba(100, 70, 50, 0.4);
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(100, 70, 50, 0.5);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  margin-bottom: 4px;
 }
 
 .inventory-menu button {
@@ -912,6 +957,7 @@ img {
   cursor: pointer;
   color: var(--text-primary);
   font-size: 0.85rem;
+  font-weight: 500;
   transition: none;
 }
 
@@ -926,28 +972,25 @@ img {
   font-size: 0.9rem;
 }
 
-/* =================================================================
-   BOTTOM PANEL: CHAT
-   ================================================================= */
-
+/* PRIORITY 10 & 12: Reduced chat height, compact Send button */
 .chat-panel {
   border-top: 1px solid rgba(100, 70, 50, 0.5);
-  padding: 14px 16px 16px;
-  background-image: url('assets/ui/Frame/Frame_background.png');
-  background-size: 256px 256px;
-  background-repeat: repeat;
-  background-blend-mode: overlay;
-  background-color: rgba(10, 10, 10, 0.9);
+  padding: 12px 16px 14px;
+  background-image: none;
+  background-color: rgba(8, 8, 10, 0.95);
+  max-height: 170px;
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-tabs {
   display: flex;
   gap: 4px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .chat-tab {
-  padding: 6px 12px;
+  padding: 5px 10px;
   border: none;
   
   background-image: url('assets/ui/Button/Button%233/Button%233_Status=Grey_Default.png');
@@ -981,17 +1024,18 @@ img {
 }
 
 .chat-log {
-  background: rgba(5, 5, 5, 0.8);
+  background: rgba(5, 5, 5, 0.85);
   border: 1px solid rgba(100, 70, 50, 0.4);
-  border-radius: 4px;
-  padding: 12px;
-  height: 140px;
+  border-radius: 3px;
+  padding: 10px;
+  height: 90px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   font-size: 0.85rem;
   line-height: 1.5;
+  flex: 1;
 }
 
 .chat-log::-webkit-scrollbar {
@@ -1027,32 +1071,36 @@ img {
 .chat-input {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 10px;
-  margin-top: 12px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
+/* PRIORITY 11: Properly styled input field */
 .chat-input input {
-  background: rgba(10, 10, 10, 0.8);
+  background: rgba(8, 8, 10, 0.95);
   border: 2px solid transparent;
   border-radius: 0;
-  padding: 10px 14px;
+  padding: 8px 12px;
   font-size: 0.9rem;
   
   /* Use input field frame */
   border-image: url('assets/ui/Input Field/Frame_input.png') 8 12 fill;
   border-image-width: 8px 12px;
   border-image-repeat: stretch;
+  image-rendering: pixelated;
 }
 
 .chat-input input:focus {
   outline: none;
   border-image: url('assets/ui/Input Field/Frame_input.png') 8 12 fill;
-  box-shadow: 0 0 8px rgba(140, 100, 70, 0.4);
+  box-shadow: 0 0 10px rgba(140, 100, 70, 0.5);
 }
 
+/* PRIORITY 12: Compact Send button */
 .chat-input button {
-  padding: 10px 20px;
+  padding: 8px 16px;
   border: none;
+  min-width: 70px;
   
   background-image: url('assets/ui/Button/Button%231/Status=Red_Default.png');
   background-size: 100% 100%;
@@ -1077,6 +1125,67 @@ img {
 /* =================================================================
    RESPONSIVE
    ================================================================= */
+
+/* PRIORITY 4: Inventory tooltip system */
+.tooltip {
+  position: fixed;
+  display: none;
+  min-width: 200px;
+  max-width: 280px;
+  padding: 12px 14px;
+  z-index: 1000;
+  pointer-events: none;
+  
+  /* Use notice frame asset */
+  background-color: rgba(8, 8, 10, 0.98);
+  background-image: url('assets/ui/Notice/Frame_notice_v1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  image-rendering: pixelated;
+  
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+}
+
+.tooltip-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 6px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.tooltip-rarity {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.tooltip-rarity.common { color: #999; }
+.tooltip-rarity.uncommon { color: var(--green); }
+.tooltip-rarity.rare { color: var(--blue); }
+.tooltip-rarity.epic { color: var(--purple); }
+
+.tooltip-description {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(100, 70, 50, 0.3);
+}
+
+.tooltip-stats {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.tooltip-value {
+  color: var(--gold);
+  font-weight: 600;
+}
 
 @media (max-width: 1200px) {
   .game-layout {

@@ -6,54 +6,74 @@
 
 const UIComponents = (() => {
   /**
-   * Create a tooltip element
+   * Create a tooltip element with improved styling
+   * PRIORITY 4 & 5: Better tooltips for inventory
    */
-  function createTooltip(text, targetElement) {
+  function createTooltip(item) {
     const tooltip = document.createElement('div');
     tooltip.className = 'tooltip';
-    tooltip.textContent = text;
-    tooltip.style.cssText = `
-      position: fixed;
-      display: none;
-      background: rgba(10, 16, 22, 0.95);
-      border: 1px solid #f0c46e;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      color: #e7eff8;
-      pointer-events: none;
-      z-index: 1000;
-      max-width: 250px;
-      line-height: 1.4;
-    `;
-
+    
+    const title = document.createElement('div');
+    title.className = 'tooltip-title';
+    title.textContent = item.name;
+    
+    const rarity = document.createElement('div');
+    rarity.className = `tooltip-rarity ${item.rarity}`;
+    rarity.textContent = item.rarity;
+    
+    const desc = document.createElement('div');
+    desc.className = 'tooltip-description';
+    desc.textContent = item.description;
+    
+    const stats = document.createElement('div');
+    stats.className = 'tooltip-stats';
+    stats.innerHTML = `Value: <span class="tooltip-value">${item.value}g</span>`;
+    
+    tooltip.appendChild(title);
+    tooltip.appendChild(rarity);
+    tooltip.appendChild(desc);
+    tooltip.appendChild(stats);
+    
     document.body.appendChild(tooltip);
-
-    targetElement.addEventListener('mouseenter', (e) => {
-      tooltip.style.display = 'block';
-      positionTooltip(tooltip, e);
-    });
-
-    targetElement.addEventListener('mousemove', (e) => {
-      positionTooltip(tooltip, e);
-    });
-
-    targetElement.addEventListener('mouseleave', () => {
-      tooltip.style.display = 'none';
-    });
-
     return tooltip;
   }
 
+  function showTooltip(tooltip, event) {
+    tooltip.style.display = 'block';
+    positionTooltip(tooltip, event);
+  }
+
+  function hideTooltip(tooltip) {
+    tooltip.style.display = 'none';
+  }
+
   function positionTooltip(tooltip, event) {
-    const x = event.clientX + 12;
-    const y = event.clientY + 12;
-    tooltip.style.left = `${x}px`;
-    tooltip.style.top = `${y}px`;
+    const x = event.clientX + 14;
+    const y = event.clientY + 14;
+    
+    // Keep tooltip within viewport
+    const rect = tooltip.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    let finalX = x;
+    let finalY = y;
+    
+    if (x + rect.width > viewportWidth) {
+      finalX = event.clientX - rect.width - 14;
+    }
+    
+    if (y + rect.height > viewportHeight) {
+      finalY = event.clientY - rect.height - 14;
+    }
+    
+    tooltip.style.left = `${finalX}px`;
+    tooltip.style.top = `${finalY}px`;
   }
 
   /**
    * Create an inventory slot element
+   * PRIORITY 4: Icon-first design, no names in slots
    */
   function createInventorySlot(invItem, index) {
     const slot = document.createElement('button');
@@ -66,20 +86,40 @@ const UIComponents = (() => {
       const itemDef = getItemDefinition(invItem.itemId);
       if (itemDef) {
         slot.dataset.rarity = itemDef.rarity;
-        slot.title = `${itemDef.name}: ${itemDef.description}\nValue: ${itemDef.value}g`;
 
         const iconPath = getAsset('items', itemDef.icon);
         const icon = document.createElement('img');
         icon.src = iconPath;
         icon.alt = itemDef.name;
         icon.className = 'item-icon';
-
-        const name = document.createElement('span');
-        name.className = 'item-name';
-        name.textContent = invItem.quantity > 1 ? `${itemDef.name} x${invItem.quantity}` : itemDef.name;
-
         slot.appendChild(icon);
-        slot.appendChild(name);
+
+        // Show quantity if > 1
+        if (invItem.quantity > 1) {
+          const qty = document.createElement('span');
+          qty.className = 'item-quantity';
+          qty.textContent = invItem.quantity;
+          slot.appendChild(qty);
+        }
+        
+        // Create tooltip on hover
+        let tooltip = null;
+        slot.addEventListener('mouseenter', (e) => {
+          tooltip = createTooltip(itemDef);
+          showTooltip(tooltip, e);
+        });
+        
+        slot.addEventListener('mousemove', (e) => {
+          if (tooltip) positionTooltip(tooltip, e);
+        });
+        
+        slot.addEventListener('mouseleave', () => {
+          if (tooltip) {
+            hideTooltip(tooltip);
+            tooltip.remove();
+            tooltip = null;
+          }
+        });
       }
     } else {
       slot.classList.add('empty');
@@ -153,19 +193,36 @@ const UIComponents = (() => {
 
   /**
    * Create NPC/interactable list item
+   * PRIORITY 7: Use actual icon assets for NPCs
    */
-  function createInteractableItem(name, type = 'npc') {
+  function createInteractableItem(name, type = 'npc', iconKey = null) {
     const item = document.createElement('div');
     item.className = `interactable-item ${type}`;
     
-    const icon = document.createElement('span');
-    icon.className = 'icon';
-    icon.textContent = type === 'npc' ? '👤' : '⚙';
+    const iconEl = document.createElement('span');
+    iconEl.className = 'icon';
+    
+    // PRIORITY 7: Map NPCs to appropriate icons
+    if (type === 'npc' && iconKey) {
+      // Use actual icon asset if provided
+      const img = document.createElement('img');
+      img.className = 'icon';
+      img.src = getAsset('icons', iconKey);
+      img.alt = name;
+      item.appendChild(img);
+    } else if (type === 'npc') {
+      // Generic NPC icon
+      iconEl.textContent = '👤';
+      item.appendChild(iconEl);
+    } else {
+      // Point of interest
+      iconEl.textContent = '⚙';
+      item.appendChild(iconEl);
+    }
     
     const text = document.createElement('span');
     text.textContent = name;
     
-    item.appendChild(icon);
     item.appendChild(text);
     
     return item;
@@ -173,6 +230,9 @@ const UIComponents = (() => {
 
   return {
     createTooltip,
+    showTooltip,
+    hideTooltip,
+    positionTooltip,
     createInventorySlot,
     createActionButton,
     createStatBar,

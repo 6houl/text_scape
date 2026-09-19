@@ -358,6 +358,10 @@
   let selectedInventoryIndex = null;
 
   function openInventoryMenu(index, event) {
+    // PRIORITY 5: Close any open tooltips first
+    const tooltips = document.querySelectorAll('.tooltip');
+    tooltips.forEach(t => t.remove());
+    
     selectedInventoryIndex = index;
     const state = GameState.getState();
     const invItem = state.inventory[index];
@@ -367,8 +371,30 @@
 
     refs.inventoryMenuTitle.textContent = itemDef.name;
     refs.inventoryMenu.style.display = 'flex';
-    refs.inventoryMenu.style.left = `${event.clientX + 10}px`;
-    refs.inventoryMenu.style.top = `${event.clientY + 10}px`;
+    
+    // PRIORITY 5: Position menu relative to pointer, constrain to viewport
+    let x = event.clientX + 10;
+    let y = event.clientY + 10;
+    
+    // Ensure menu renders first to get dimensions
+    setTimeout(() => {
+      const rect = refs.inventoryMenu.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Adjust if menu would overflow right edge
+      if (x + rect.width > viewportWidth) {
+        x = event.clientX - rect.width - 10;
+      }
+      
+      // Adjust if menu would overflow bottom edge
+      if (y + rect.height > viewportHeight) {
+        y = event.clientY - rect.height - 10;
+      }
+      
+      refs.inventoryMenu.style.left = `${x}px`;
+      refs.inventoryMenu.style.top = `${y}px`;
+    }, 0);
   }
 
   function closeInventoryMenu() {
@@ -421,6 +447,13 @@
   // Close menu on outside click
   window.addEventListener('click', (e) => {
     if (!e.target.closest('.inventory-slot') && !e.target.closest('.inventory-menu')) {
+      closeInventoryMenu();
+    }
+  });
+
+  // PRIORITY 5: Close menu with ESC key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
       closeInventoryMenu();
     }
   });

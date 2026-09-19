@@ -12,6 +12,18 @@ const SceneRenderer = (() => {
   }
 
   /**
+   * PRIORITY 7: Map NPC IDs to appropriate icon assets
+   */
+  function getNpcIcon(npcId) {
+    const iconMap = {
+      'trader_marcus': 'trader',
+      'innkeeper_elara': 'hand', // Generic NPC icon - could be updated with innkeeper asset if added
+      // Add more NPC-to-icon mappings as needed
+    };
+    return iconMap[npcId] || null; // null = use default silhouette
+  }
+
+  /**
    * Render exploration scene
    */
   function renderExploration(locationId) {
@@ -51,9 +63,11 @@ const SceneRenderer = (() => {
 
     // NPCs
     if (location.npcs && location.npcs.length > 0) {
-      const npcsSection = createSection('Nearby', location.npcs.map(npc =>
-        UIComponents.createInteractableItem(formatNpcName(npc), 'npc')
-      ));
+      const npcsSection = createSection('Nearby', location.npcs.map(npc => {
+        // PRIORITY 7: Map NPCs to appropriate icons
+        const iconKey = getNpcIcon(npc);
+        return UIComponents.createInteractableItem(formatNpcName(npc), 'npc', iconKey);
+      }));
       scene.appendChild(npcsSection);
     }
 
